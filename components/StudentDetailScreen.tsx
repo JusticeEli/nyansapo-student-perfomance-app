@@ -1,9 +1,22 @@
-import React, { useEffect } from "react";
-import { View, StyleSheet, ScrollView, Text, Alert } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import StudentHeader from "./StudentHeader";
 import StudentStrandCard from "./StudentStrandCard";
-import { Eye, BookOpen, PenTool, Volume2, AlertCircle } from "lucide-react-native";
+import {
+  Eye,
+  BookOpen,
+  PenTool,
+  Volume2,
+  AlertCircle,
+} from "lucide-react-native";
+import { ThemedView } from "./ThemedView";
 
 const mockStudents = [
   {
@@ -28,21 +41,69 @@ const mockStudents = [
   },
 ];
 
-const StudentDetailScreen = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { studentId } = route.params as { studentId: string }||{studentId:"student1"};
+interface Strand {
+  competence: "BE" | "AE" | "ME" | "EE";
+  progress: number;
+}
 
-  const student = mockStudents.find((s) => s.id === studentId);
+interface Student {
+  id: string;
+  name: string;
+  strands: {
+    letterIdentification: Strand;
+    letterNaming: Strand;
+    letterFormation: Strand;
+    phonemicAwareness: Strand;
+  };
+}
+const StudentDetailScreen = () => {
+  const { studentId } = {
+    studentId: "student1",
+  };
+
+  //const student = mockStudents.find((s) => s.id === studentId);
+  const [students, setStudents] = useState<Student[]>([]); // Holds all students fetched from the API
+  const [student, setStudent] = useState<Student | null>(null); // Holds the specific student
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/students"); // Replace with your API URL
+        const data = await response.json();
+        setStudents(data as Student[]); // Save all students
+           } catch (error) {
+        console.error("Error fetching strand data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStudentsData();
+  }, []);
+
+  useEffect(() => {
+    const foundStudent = students?.find((s) => s.id === studentId);
+    console.log("foundstudent: "+foundStudent);
+    
+    setStudent(foundStudent || null); // Save the specific student
+
+  }, [students]); 
+   useEffect(() => {
     if (!student) {
       Alert.alert("Error", "Student not found", [
-        { text: "OK", onPress: () => navigation.goBack() },
+        { text: "OK", onPress: () => {} },
       ]);
     }
-  }, [student, navigation]);
+  }, [student]);
 
+  if (loading) {
+    return (
+      <ThemedView style={styles.container}>
+        <ActivityIndicator size="large" color="#4CAF50" />
+      </ThemedView>
+    );
+  }
   if (!student) {
     return (
       <View style={styles.notFoundContainer}>
