@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
 
 import ClassOverviewHeader from "@/components/ClassOverviewHeader";
 import MasteryKeyPanel from "@/components/MasteryKeyPanel";
@@ -6,10 +6,12 @@ import StrandList from "@/components/StrandList";
 import { ThemedView } from "@/components/ThemedView";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
+import { showErrorMessage } from "@/util/MainUtility";
 
 const ClassOverviewScreen = () => {
   const [strandListData, setStrandListData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [networkError, setNetworkError] = useState<unknown | null>(null);
 
   useEffect(() => {
     const fetchStrandData = async () => {
@@ -18,7 +20,7 @@ const ClassOverviewScreen = () => {
         const data = await response.json();
         setStrandListData(data.strands);
       } catch (error) {
-        console.error("Error fetching strand data:", error);
+        setNetworkError(error);
       } finally {
         setLoading(false);
       }
@@ -39,6 +41,10 @@ const ClassOverviewScreen = () => {
     console.log("hello");
     router.push(`/student/${studentId}`);
   };
+
+  if (networkError) {
+    return showErrorMessage(networkError);
+  }
 
   return (
     <ThemedView style={styles.container}>

@@ -19,8 +19,7 @@ import {
 import StudentHeader from "./StudentHeader";
 import StudentStrandCard from "./StudentStrandCard";
 import { ThemedView } from "./ThemedView";
-
-
+import { showErrorMessage } from "@/util/MainUtility";
 
 interface Strand {
   competence: "BE" | "AE" | "ME" | "EE";
@@ -55,7 +54,7 @@ const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
         const data = await response.json();
         setStudents(data as Student[]); // Save all students
       } catch (error) {
-        console.error("Error fetching strand data:", error);
+        showErrorMessage(error);
       } finally {
         setLoading(false);
       }
@@ -71,7 +70,7 @@ const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
     setStudent(foundStudent || null); // Save the specific student
   }, [students]);
   useEffect(() => {
-    if (!student) {
+    if (!student&&!loading) {
       Alert.alert("Error", "Student not found", [
         { text: "OK", onPress: () => {} },
       ]);
