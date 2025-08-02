@@ -20,28 +20,7 @@ import { ThemedView } from "./ThemedView";
 import StudentHeader from "./StudentHeader";
 import StudentStrandCard from "./StudentStrandCard";
 
-const mockStudents = [
-  {
-    id: "student1",
-    name: "John Doe",
-    strands: {
-      letterIdentification: { competence: "ME", progress: 75 },
-      letterNaming: { competence: "AE", progress: 50 },
-      letterFormation: { competence: "BE", progress: 30 },
-      phonemicAwareness: { competence: "EE", progress: 90 },
-    },
-  },
-  {
-    id: "student2",
-    name: "Jane Smith",
-    strands: {
-      letterIdentification: { competence: "AE", progress: 60 },
-      letterNaming: { competence: "ME", progress: 80 },
-      letterFormation: { competence: "ME", progress: 75 },
-      phonemicAwareness: { competence: "AE", progress: 55 },
-    },
-  },
-];
+
 
 interface Strand {
   competence: "BE" | "AE" | "ME" | "EE";

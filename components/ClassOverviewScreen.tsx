@@ -9,26 +9,7 @@ import MasteryKeyPanel from "@/components/MasteryKeyPanel";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 
-const strandListData_ = [
-  {
-    strandId: "strand1",
-    strand: "Letter Identification",
-    workCovered: 70,
-    students: [
-      { studentId: "student1", name: "John Doe", competence: "ME" },
-      { studentId: "student2", name: "Jane Smith", competence: "AE" },
-    ],
-  },
-  {
-    strandId: "strand2",
-    strand: "Letter Naming",
-    workCovered: 65,
-    students: [
-      { studentId: "student1", name: "John Doe", competence: "AE" },
-      { studentId: "student2", name: "Jane Smith", competence: "ME" },
-    ],
-  },
-];
+
 
 export default function ClassOverviewScreen() {
   const [strandListData, setStrandListData] = useState([]);
