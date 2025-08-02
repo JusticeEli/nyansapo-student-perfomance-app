@@ -10,10 +10,17 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Start the backend server
+
+   Find instructions in this repo
 
    ```bash
-   npx expo start
+   https://github.com/Nyansapo-AI/fullstack-dev-takehome/tree/main
+   ```
+3. Start the app
+
+   ```bash
+   npm run web
    ```
 
 In the output, you'll find options to open the app in a
