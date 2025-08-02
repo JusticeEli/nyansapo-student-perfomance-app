@@ -1,17 +1,13 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "@/components/ThemedText";
 import ClassOverviewHeader from "@/components/ClassOverviewHeader";
-import StrandCard from "@/components/StrandCard";
-import StrandList from "@/components/StrandList";
 import MasteryKeyPanel from "@/components/MasteryKeyPanel";
-import { useEffect, useState } from "react";
+import StrandList from "@/components/StrandList";
+import { ThemedView } from "@/components/ThemedView";
 import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 
-
-
-export default function ClassOverviewScreen() {
+const ClassOverviewScreen = () => {
   const [strandListData, setStrandListData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +51,7 @@ export default function ClassOverviewScreen() {
       </View>
     </ThemedView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -66,3 +62,5 @@ const styles = StyleSheet.create({
     //alignSelf:"flex-end",
   },
 });
+
+export default ClassOverviewScreen;
