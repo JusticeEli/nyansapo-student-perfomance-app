@@ -7,6 +7,7 @@ import StrandCard from "@/components/StrandCard";
 import StrandList from "@/components/StrandList";
 import MasteryKeyPanel from "@/components/MasteryKeyPanel";
 import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 
 const strandListData_ = [
   {
@@ -56,12 +57,17 @@ export default function ClassOverviewScreen() {
       </ThemedView>
     );
   }
+  const router = useRouter();
+  const onStudentClick = (studentId: string) => {
+    console.log("hello");
+    router.push(`/student/${studentId}`);
+  };
 
   return (
     <ThemedView style={styles.container}>
       <ClassOverviewHeader onSearchChange={(_) => {}} />
 
-      <StrandList strandList={strandListData} />
+      <StrandList strandList={strandListData} onStudentClick={onStudentClick} />
 
       <View style={styles.stickyContainer}>
         <MasteryKeyPanel />

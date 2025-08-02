@@ -15,9 +15,10 @@ import {
   Volume2,
   AlertCircle,
 } from "lucide-react-native";
-import { ThemedView } from "@/components/ThemedView";
-import StudentHeader from "@/components/StudentHeader";
-import StudentStrandCard from "@/components/StudentStrandCard";
+
+import { ThemedView } from "./ThemedView";
+import StudentHeader from "./StudentHeader";
+import StudentStrandCard from "./StudentStrandCard";
 
 const mockStudents = [
   {
@@ -57,14 +58,13 @@ interface Student {
     phonemicAwareness: Strand;
   };
 }
-const StudentDetailScreen = () => {
-  console.log("id: " + "");
 
-  const { studentId } = {
-    studentId: "student1",
-  };
+interface StudentDetailScreenProp {
+  studentId: string;
+}
+const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
+  console.log("studentId: " + studentId);
 
-  //const student = mockStudents.find((s) => s.id === studentId);
   const [students, setStudents] = useState<Student[]>([]); // Holds all students fetched from the API
   const [student, setStudent] = useState<Student | null>(null); // Holds the specific student
   const [loading, setLoading] = useState(true);
