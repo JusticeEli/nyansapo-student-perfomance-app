@@ -76,11 +76,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-
- /*    flexBasis: "45%", // Each card takes 48% of the row width
-    flexGrow: 1, // Ensures cards grow equally
-    height: 200, // Fixed height for all cards
-    marginHorizontal:8, */
   },
   cardHeader: {
     flexDirection: "row",

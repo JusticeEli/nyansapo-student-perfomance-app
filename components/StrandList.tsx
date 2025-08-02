@@ -13,9 +13,10 @@ interface StrandListProps {
       competence: string;
     }[];
   }[];
+  onStudentClick: (studentId: string) => void;
 }
 
-const StrandList = ({ strandList }: StrandListProps) => {
+const StrandList = ({ strandList,onStudentClick }: StrandListProps) => {
   const [numColumns, setNumColumns] = useState(2); // Default to 2 columns
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const StrandList = ({ strandList }: StrandListProps) => {
         keyExtractor={(item) => item.strandId}
         renderItem={({ item }) => (
           <View style={styles.cardWrapper}>
-            <StrandCard strand={item} onStudentClick={(id) => console.log(id)} />
+            <StrandCard strand={item} onStudentClick={onStudentClick} />
           </View>
         )}
         numColumns={numColumns} // Dynamically set the number of columns

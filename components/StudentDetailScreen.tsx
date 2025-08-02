@@ -7,8 +7,7 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import StudentHeader from "./StudentHeader";
-import StudentStrandCard from "./StudentStrandCard";
+
 import {
   Eye,
   BookOpen,
@@ -16,7 +15,9 @@ import {
   Volume2,
   AlertCircle,
 } from "lucide-react-native";
-import { ThemedView } from "./ThemedView";
+import { ThemedView } from "@/components/ThemedView";
+import StudentHeader from "@/components/StudentHeader";
+import StudentStrandCard from "@/components/StudentStrandCard";
 
 const mockStudents = [
   {
@@ -57,6 +58,8 @@ interface Student {
   };
 }
 const StudentDetailScreen = () => {
+  console.log("id: " + "");
+
   const { studentId } = {
     studentId: "student1",
   };
@@ -72,7 +75,7 @@ const StudentDetailScreen = () => {
         const response = await fetch("http://localhost:3000/students"); // Replace with your API URL
         const data = await response.json();
         setStudents(data as Student[]); // Save all students
-           } catch (error) {
+      } catch (error) {
         console.error("Error fetching strand data:", error);
       } finally {
         setLoading(false);
@@ -84,12 +87,11 @@ const StudentDetailScreen = () => {
 
   useEffect(() => {
     const foundStudent = students?.find((s) => s.id === studentId);
-    console.log("foundstudent: "+foundStudent);
-    
-    setStudent(foundStudent || null); // Save the specific student
+    console.log("foundstudent: " + foundStudent);
 
-  }, [students]); 
-   useEffect(() => {
+    setStudent(foundStudent || null); // Save the specific student
+  }, [students]);
+  useEffect(() => {
     if (!student) {
       Alert.alert("Error", "Student not found", [
         { text: "OK", onPress: () => {} },
