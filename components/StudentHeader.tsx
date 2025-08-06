@@ -66,21 +66,7 @@ const StudentHeader = ({ studentName }: StudentHeaderProps) => {
             </View>
           </View>
         </View>
-        <TouchableOpacity
-          style={[
-            styles.downloadButton,
-            {
-              backgroundColor: isDarkTheme ? 'white' : 'black',
-              borderColor: isDarkTheme ? 'white' : 'black',
-            },
-          ]}
-          onPress={handleDownload}
-        >
-          <Download size={16} color={isDarkTheme ? 'black' : 'white'} style={styles.downloadIcon} />
-          <Text style={[styles.downloadText, { color: isDarkTheme ? 'black' : 'white' }]}>
-            Download Report
-          </Text>
-        </TouchableOpacity>
+       
       </View>
     </View>
   );
