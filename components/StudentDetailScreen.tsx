@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -51,7 +52,7 @@ const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
   useEffect(() => {
     const fetchStudentsData = async () => {
       try {
-        const baseUrl=config.JSON_SERVER_BASE_URL!!
+        const baseUrl = config.JSON_SERVER_BASE_URL!!;
         const response = await fetch(`${baseUrl}/students`); // Replace with your API URL
         const data = await response.json();
         setStudents(data as Student[]); // Save all students
@@ -72,7 +73,7 @@ const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
     setStudent(foundStudent || null); // Save the specific student
   }, [students]);
   useEffect(() => {
-    if (!student&&!loading) {
+    if (!student && !loading) {
       Alert.alert("Error", "Student not found", [
         { text: "OK", onPress: () => {} },
       ]);
@@ -111,21 +112,28 @@ const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
     phonemicAwareness: "Phonemic Awareness",
   };
 
-  return (
-    <ScrollView style={styles.container}>
-      <StudentHeader studentName={student.name} />
+  const renderStrandCard = ({ item }: { item: [string, Strand] }) => {
+    const [strandKey, strandData] = item;
+    return (
+      <StudentStrandCard
+        key={strandKey}
+        strandName={strandNames[strandKey as keyof typeof strandNames]}
+        strandData={strandData}
+        icon={strandIcons[strandKey as keyof typeof strandIcons]}
+      />
+    );
+  };
 
-      <View style={styles.strandGrid}>
-        {Object.entries(student.strands).map(([strandKey, strandData]) => (
-          <StudentStrandCard
-            key={strandKey}
-            strandName={strandNames[strandKey as keyof typeof strandNames]}
-            strandData={strandData}
-            icon={strandIcons[strandKey as keyof typeof strandIcons]}
-          />
-        ))}
-      </View>
-    </ScrollView>
+  return (
+    <View style={styles.container}>
+      <StudentHeader studentName={student.name} />
+      <FlatList
+        data={Object.entries(student.strands)} // Convert strands object to an array
+        renderItem={renderStrandCard} // Render each strand as a card
+        keyExtractor={([strandKey]) => strandKey} // Use strandKey as the unique key
+        contentContainerStyle={styles.strandGrid} // Apply styles to the list container
+      />
+    </View>
   );
 };
 
@@ -135,12 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     padding: 16,
   },
-  strandGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginTop: 16,
-  },
+
   notFoundContainer: {
     flex: 1,
     justifyContent: "center",
@@ -164,8 +167,6 @@ const styles = StyleSheet.create({
     color: "#757575",
   },
   strandCard: {
-    flexBasis: "48%", // Each card takes 48% of the row width
-    flexGrow: 1, // Ensures cards grow equally
     height: 200, // Fixed height for all cards
     marginBottom: 16, // Spacing between rows
   },
