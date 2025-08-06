@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Appearance, ColorSchemeName } from 'react-native';
-import { ArrowLeft, Download, User } from 'lucide-react-native'; // Assuming you're using lucide-react-native for icons
-import { useNavigation } from '@react-navigation/native'; // For navigation
+import { ArrowLeft, Download, User } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 interface StudentHeaderProps {
   studentName: string;
@@ -22,7 +22,6 @@ const StudentHeader = ({ studentName }: StudentHeaderProps) => {
   const isDarkTheme = theme === 'dark';
 
   const handleDownload = () => {
-    // Mock download functionality
     Alert.alert(
       'Download Report',
       `Student Performance Report\n\nStudent: ${studentName}\nGenerated: ${new Date().toLocaleDateString()}`,
@@ -34,7 +33,7 @@ const StudentHeader = ({ studentName }: StudentHeaderProps) => {
     <View
       style={[
         styles.card,
-        { backgroundColor: isDarkTheme ? '#333' : '#1E88E5' }, // Adjust background color based on theme
+        { backgroundColor: isDarkTheme ? 'black' : 'white' }, // Black for dark theme, white for light theme
       ]}
     >
       <View style={styles.headerContainer}>
@@ -42,26 +41,26 @@ const StudentHeader = ({ studentName }: StudentHeaderProps) => {
           <TouchableOpacity
             style={[
               styles.backButton,
-              { backgroundColor: isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)' },
+              { backgroundColor: isDarkTheme ? 'white' : 'black' }, // Opposite color for contrast
             ]}
             onPress={() => navigation.goBack()}
           >
-            <ArrowLeft size={20} color="white" />
+            <ArrowLeft size={20} color={isDarkTheme ? 'black' : 'white'} />
           </TouchableOpacity>
           <View style={styles.studentInfo}>
             <View
               style={[
                 styles.iconContainer,
-                { backgroundColor: isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)' },
+                { backgroundColor: isDarkTheme ? 'white' : 'black' }, // Opposite color for contrast
               ]}
             >
-              <User size={24} color="white" />
+              <User size={24} color={isDarkTheme ? 'black' : 'white'} />
             </View>
             <View>
               <Text style={[styles.studentName, { color: isDarkTheme ? 'white' : 'black' }]}>
                 {studentName}
               </Text>
-              <Text style={[styles.subtitle, { color: isDarkTheme ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' }]}>
+              <Text style={[styles.subtitle, { color: isDarkTheme ? 'white' : 'black' }]}>
                 Individual Performance Report
               </Text>
             </View>
@@ -71,14 +70,14 @@ const StudentHeader = ({ studentName }: StudentHeaderProps) => {
           style={[
             styles.downloadButton,
             {
-              backgroundColor: isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
-              borderColor: isDarkTheme ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.3)',
+              backgroundColor: isDarkTheme ? 'white' : 'black',
+              borderColor: isDarkTheme ? 'white' : 'black',
             },
           ]}
           onPress={handleDownload}
         >
-          <Download size={16} color="white" style={styles.downloadIcon} />
-          <Text style={[styles.downloadText, { color: isDarkTheme ? 'white' : 'black' }]}>
+          <Download size={16} color={isDarkTheme ? 'black' : 'white'} style={styles.downloadIcon} />
+          <Text style={[styles.downloadText, { color: isDarkTheme ? 'black' : 'white' }]}>
             Download Report
           </Text>
         </TouchableOpacity>
