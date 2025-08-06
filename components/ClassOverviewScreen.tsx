@@ -1,5 +1,5 @@
 import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
-
+import config from  "@/util/config.json"
 import ClassOverviewHeader from "@/components/ClassOverviewHeader";
 import MasteryKeyPanel from "@/components/MasteryKeyPanel";
 import StrandList from "@/components/StrandList";
@@ -16,7 +16,8 @@ const ClassOverviewScreen = () => {
   useEffect(() => {
     const fetchStrandData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/class_profile"); // Replace with your API URL
+        const baseUrl=config.JSON_SERVER_BASE_URL!!
+        const response = await fetch(`${baseUrl}/class_profile`); // Replace with your API URL
         const data = await response.json();
         setStrandListData(data.strands);
       } catch (error) {

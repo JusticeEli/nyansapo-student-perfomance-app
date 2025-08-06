@@ -20,6 +20,7 @@ import StudentHeader from "./StudentHeader";
 import StudentStrandCard from "./StudentStrandCard";
 import { ThemedView } from "./ThemedView";
 import { showErrorMessage } from "@/util/MainUtility";
+import config from "@/util/config.json";
 
 interface Strand {
   competence: "BE" | "AE" | "ME" | "EE";
@@ -50,7 +51,8 @@ const StudentDetailScreen = ({ studentId }: StudentDetailScreenProp) => {
   useEffect(() => {
     const fetchStudentsData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/students"); // Replace with your API URL
+        const baseUrl=config.JSON_SERVER_BASE_URL!!
+        const response = await fetch(`${baseUrl}/students`); // Replace with your API URL
         const data = await response.json();
         setStudents(data as Student[]); // Save all students
       } catch (error) {
