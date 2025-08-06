@@ -17,10 +17,15 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```bash
    https://github.com/Nyansapo-AI/fullstack-dev-takehome/tree/main
    ```
-3. Start the app
+
+3. Setup Configurations
+
+   Update the ./util/config.json file with appropriate `JSON_SERVER_BASE_URL`
+
+4. Start the app
 
    ```bash
-   npm run web
+   npm run start
    ```
 
 In the output, you'll find options to open the app in a
