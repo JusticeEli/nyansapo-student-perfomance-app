@@ -28,6 +28,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm run start
    ```
 
+
 In the output, you'll find options to open the app in a
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
@@ -36,6 +37,13 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Demo
+[Watch demo video](./demo/demo_video.mp4)
+
+
+![Demo](./demo/demo_gif.gif)
+
 
 ## Get a fresh project
 
