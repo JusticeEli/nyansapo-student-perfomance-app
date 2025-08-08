@@ -42,7 +42,8 @@ You can start developing by editing the files inside the **app** directory. This
 [Watch demo video](./demo/demo_video.mp4)
 
 
-![Demo](./demo/demo_gif.gif)
+<img src="./demo/demo_gif.gif" width="300" alt="Demo GIF" />
+
 
 
 ## Get a fresh project
